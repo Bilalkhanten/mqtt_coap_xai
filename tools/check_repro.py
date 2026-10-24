@@ -107,6 +107,24 @@ def check_artifacts():
     print(f"checked {len(MODELS)} models, {N_TEST} test windows, README headline numbers")
 
 
+def burst_diffs(ref, got):
+    """[(index, {field: (shipped, regenerated)})] for every burst that is not identical."""
+    out = []
+    for i, (a, b) in enumerate(zip(ref, got)):
+        if a == b:
+            continue
+        fields = {}
+        for k in a.keys() | b.keys():
+            if k == "params":
+                for kk in a[k].keys() | b[k].keys():
+                    if a[k].get(kk) != b[k].get(kk):
+                        fields[f"params.{kk}"] = (a[k].get(kk), b[k].get(kk))
+            elif a.get(k) != b.get(k):
+                fields[k] = (a.get(k), b.get(k))
+        out.append((i, fields))
+    return out
+
+
 def check_data(shipped):
     for site in ("A", "B"):
         p = ROOT / f"data/site{site}.pkl"
@@ -124,9 +142,15 @@ def check_data(shipped):
     got = pickle.loads((ROOT / "data/bursts.pkl").read_bytes())
     ref = pickle.loads((Path(shipped) / "bursts.pkl").read_bytes())
     for key in ref:
-        n = sum(a != b for a, b in zip(ref[key], got.get(key, [])))
-        print(f"{key}: shipped {len(ref[key])}, regenerated {len(got.get(key, []))}, differing {n}")
-        if len(ref[key]) != len(got.get(key, [])) or n:
+        diffs = burst_diffs(ref[key], got.get(key, []))
+        print(f"{key}: shipped {len(ref[key])}, regenerated {len(got.get(key, []))}, differing {len(diffs)}")
+        float_only = all(isinstance(a, float) and isinstance(b, float) for _, f in diffs for a, b in f.values())
+        rel = [abs(a - b) / max(abs(a), abs(b), 1e-300) for _, f in diffs for a, b in f.values() if isinstance(a, float) and isinstance(b, float)]
+        if diffs:
+            print(f"  float-only differences: {float_only}; max relative difference: {max(rel, default=0):.3e}")
+            for i, f in diffs[:3]:
+                print(f"  burst index {i}: {f}")
+        if len(ref[key]) != len(got.get(key, [])) or diffs:
             fail(f"{key} differs from the shipped data/bursts.pkl")
 
 
