@@ -8,8 +8,9 @@ DIR holds copies of the shipped data/bursts.pkl and results/stats.json taken bef
 
 artifacts  required files exist; test indices and stored probabilities are consistent; the headline numbers
            in the README equal the numbers in results/main.json and results/stats.json.
-data       both simulated sites have the documented shape and their burst schedules are identical to the shipped
-           data/bursts.pkl (compared by content; the pickle bytes differ because of object sharing).
+data       both simulated sites have the documented shape and their burst schedules equal the shipped
+           data/bursts.pkl: classes, scopes, ids and counts exactly, floats to 1e-9 relative (compared by content;
+           the pickle bytes differ because of object sharing, and on other CPUs a few floats differ in the last bit).
 stats      the re-computed results/stats.json equals the shipped one.
 """
 import json
@@ -107,6 +108,10 @@ def check_artifacts():
     print(f"checked {len(MODELS)} models, {N_TEST} test windows, README headline numbers")
 
 
+def is_float_noise(a, b, tol=1e-9):
+    return isinstance(a, float) and isinstance(b, float) and abs(a - b) <= tol * max(abs(a), abs(b))
+
+
 def burst_diffs(ref, got):
     """[(index, {field: (shipped, regenerated)})] for every burst that is not identical."""
     out = []
@@ -144,13 +149,14 @@ def check_data(shipped):
     for key in ref:
         diffs = burst_diffs(ref[key], got.get(key, []))
         print(f"{key}: shipped {len(ref[key])}, regenerated {len(got.get(key, []))}, differing {len(diffs)}")
-        float_only = all(isinstance(a, float) and isinstance(b, float) for _, f in diffs for a, b in f.values())
-        rel = [abs(a - b) / max(abs(a), abs(b), 1e-300) for _, f in diffs for a, b in f.values() if isinstance(a, float) and isinstance(b, float)]
+        # categories, ids and counts must be identical; floats may differ in the last bits (libm/CPU differences)
+        real = [(i, f) for i, f in diffs if any(not is_float_noise(a, b) for a, b in f.values())]
         if diffs:
-            print(f"  float-only differences: {float_only}; max relative difference: {max(rel, default=0):.3e}")
-            for i, f in diffs[:3]:
+            rel = [abs(a - b) / max(abs(a), abs(b)) for _, f in diffs for a, b in f.values() if isinstance(a, float) and isinstance(b, float)]
+            print(f"  {len(diffs)} burst(s) differ in the last float bits only: {not real}; max relative difference {max(rel, default=0):.1e}")
+            for i, f in (real or diffs)[:3]:
                 print(f"  burst index {i}: {f}")
-        if len(ref[key]) != len(got.get(key, [])) or diffs:
+        if len(ref[key]) != len(got.get(key, [])) or real:
             fail(f"{key} differs from the shipped data/bursts.pkl")
 
 
