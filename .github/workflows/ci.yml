@@ -122,15 +122,14 @@ jobs:
         with:
           name: siteA-data
           path: data
-      - name: Redraw every figure
-        working-directory: src
+      - name: Redraw every figure (src/make_figures.sh, starting from an empty figs/)
         env:
           MPLBACKEND: Agg
         run: |
-          expected=$(ls ../figs/*.png | wc -l)
-          rm ../figs/*.png
-          for f in figures_a figures_b figures_c figures_d; do python $f.py; done
-          actual=$(ls ../figs/*.png | wc -l)
+          expected=$(ls figs/*.png | wc -l)
+          rm figs/*.png
+          bash src/make_figures.sh
+          actual=$(ls figs/*.png | wc -l)
           echo "figures: $actual regenerated, $expected shipped"
           test "$actual" -eq "$expected"
       - uses: actions/upload-artifact@v4
