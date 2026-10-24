@@ -218,3 +218,13 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# --- project-specific ---
+# keep the shipped experiment logs (the template above ignores *.log)
+!results/*.log
+results/run_all.log
+# regenerated on demand by src/generate_data.py, exp_robust.py and figures_b.py (see README)
+data/siteA.pkl
+data/siteB.pkl
+data/siteA_scale*.pkl
+data/sim_cache.pkl

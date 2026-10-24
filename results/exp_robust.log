@@ -1,0 +1,28 @@
+E7 xgb held-out none macroF1 0.907 {'V1-bias': np.float64(0.81), 'V2-ramp': np.float64(0.646), 'V3-balanced': np.float64(0.041)}
+E7 xgb held-out V1-bias macroF1 0.902 {'V1-bias': np.float64(0.667), 'V2-ramp': np.float64(0.542), 'V3-balanced': np.float64(0.0)}
+E7 xgb held-out V2-ramp macroF1 0.904 {'V1-bias': np.float64(0.797), 'V2-ramp': np.float64(0.611), 'V3-balanced': np.float64(0.06)}
+E7 xgb held-out V3-balanced macroF1 0.908 {'V1-bias': np.float64(0.803), 'V2-ramp': np.float64(0.667), 'V3-balanced': np.float64(0.032)}
+E7 rf held-out none macroF1 0.896 {'V1-bias': np.float64(0.822), 'V2-ramp': np.float64(0.7), 'V3-balanced': np.float64(0.102)}
+E7 rf held-out V1-bias macroF1 0.885 {'V1-bias': np.float64(0.789), 'V2-ramp': np.float64(0.631), 'V3-balanced': np.float64(0.003)}
+E7 rf held-out V2-ramp macroF1 0.896 {'V1-bias': np.float64(0.824), 'V2-ramp': np.float64(0.644), 'V3-balanced': np.float64(0.127)}
+E7 rf held-out V3-balanced macroF1 0.902 {'V1-bias': np.float64(0.793), 'V2-ramp': np.float64(0.695), 'V3-balanced': np.float64(0.013)}
+E8 scale 1.0 {'xgb': 0.905, 'rf': 0.897, 'cnnlstm': 0.889, 'lr': 0.747}
+E8 scale 0.5 {'xgb': 0.857, 'rf': 0.833, 'cnnlstm': 0.832, 'lr': 0.72}
+E8 scale 0.25 {'xgb': 0.751, 'rf': 0.71, 'cnnlstm': 0.734, 'lr': 0.668}
+E8 scale 0.1 {'xgb': 0.6, 'rf': 0.561, 'cnnlstm': 0.611, 'lr': 0.596}
+E8 scale 0.05 {'xgb': 0.51, 'rf': 0.474, 'cnnlstm': 0.551, 'lr': 0.542}
+E10 zero-shot xgb 0.785 [0.9  0.5  0.97 0.98 0.23 0.95 0.97]
+E10 zero-shot rf 0.746 [0.92 0.21 0.97 0.97 0.25 0.93 0.97]
+E10 zero-shot cnnlstm 0.861 [0.97 0.52 0.96 0.96 0.76 0.88 0.97]
+E10 zero-shot lr 0.744 [0.9  0.21 0.92 0.81 0.7  0.7  0.96]
+E10 few-shot k=0 xgb 0.785
+E10 few-shot k=0 rf 0.746
+E10 few-shot k=1 xgb 0.844
+E10 few-shot k=1 rf 0.827
+E10 few-shot k=2 xgb 0.849
+E10 few-shot k=2 rf 0.832
+E10 few-shot k=4 xgb 0.868
+E10 few-shot k=4 rf 0.836
+E10 few-shot k=8 xgb 0.9
+E10 few-shot k=8 rf 0.854
+ROBUST DONE

@@ -1,0 +1,57 @@
+lr trial 1/6 val macro-F1=0.7195  fit=10s  {'C': 1.334987911197151}
+lr trial 2/6 val macro-F1=0.7204  fit=11s  {'C': 30.62449986287022}
+lr trial 3/6 val macro-F1=0.7202  fit=10s  {'C': 7.558375280096022}
+lr trial 4/6 val macro-F1=0.7185  fit=4s  {'C': 0.013367061615966628}
+lr trial 5/6 val macro-F1=0.7171  fit=6s  {'C': 0.03168337404687461}
+lr trial 6/6 val macro-F1=0.7190  fit=11s  {'C': 23.3220771128005}
+rf trial 1/8 val macro-F1=0.7891  fit=157s  {'n_estimators': 400, 'max_depth': 10, 'min_samples_leaf': 2, 'max_features': 0.5}
+rf trial 2/8 val macro-F1=0.8472  fit=90s  {'n_estimators': 200, 'max_depth': 24, 'min_samples_leaf': 1, 'max_features': 0.3}
+rf trial 3/8 val macro-F1=0.8544  fit=52s  {'n_estimators': 400, 'max_depth': 14, 'min_samples_leaf': 2, 'max_features': 'sqrt'}
+rf trial 4/8 val macro-F1=0.8286  fit=129s  {'n_estimators': 400, 'max_depth': 14, 'min_samples_leaf': 4, 'max_features': 0.3}
+rf trial 5/8 val macro-F1=0.8533  fit=118s  {'n_estimators': 300, 'max_depth': 18, 'min_samples_leaf': 2, 'max_features': 0.3}
+rf trial 6/8 val macro-F1=0.8365  fit=257s  {'n_estimators': 300, 'max_depth': None, 'min_samples_leaf': 4, 'max_features': 0.5}
+rf trial 7/8 val macro-F1=0.8389  fit=301s  {'n_estimators': 400, 'max_depth': 24, 'min_samples_leaf': 2, 'max_features': 0.5}
+rf trial 8/8 val macro-F1=0.8495  fit=38s  {'n_estimators': 300, 'max_depth': 14, 'min_samples_leaf': 4, 'max_features': 'sqrt'}
+xgb trial 1/12 val macro-F1=0.8452  fit=12s  {'n_estimators': 600, 'max_depth': 9, 'learning_rate': 0.03319428073784006, 'subsample': 0.6142721115094384, 'colsample_bytree': 0.7574444101356852, 'reg_lambda': 0.8558783695033981, 'gamma': 0.9171677731928523, 'min_child_weight': 4.25820194997766}
+xgb trial 2/12 val macro-F1=0.8535  fit=6s  {'n_estimators': 600, 'max_depth': 7, 'learning_rate': 0.0980028941882224, 'subsample': 0.7987493741574017, 'colsample_bytree': 0.6237574610136654, 'reg_lambda': 0.10558155429619294, 'gamma': 0.19240214398531064, 'min_child_weight': 4.92075928794711}
+xgb trial 3/12 val macro-F1=0.8397  fit=8s  {'n_estimators': 600, 'max_depth': 9, 'learning_rate': 0.07025181764117168, 'subsample': 0.6014936968208303, 'colsample_bytree': 0.9150238649008728, 'reg_lambda': 0.20366770147605215, 'gamma': 0.26759930456378545, 'min_child_weight': 7.591579667892605}
+xgb trial 4/12 val macro-F1=0.8478  fit=5s  {'n_estimators': 600, 'max_depth': 4, 'learning_rate': 0.097031347947536, 'subsample': 0.9388600985463478, 'colsample_bytree': 0.8198585834712631, 'reg_lambda': 3.0446816846262377, 'gamma': 0.09149560506304566, 'min_child_weight': 3.4765127091004366}
+xgb trial 5/12 val macro-F1=0.8377  fit=4s  {'n_estimators': 600, 'max_depth': 8, 'learning_rate': 0.22307999773630746, 'subsample': 0.7445056236056631, 'colsample_bytree': 0.7990920336036065, 'reg_lambda': 0.13137214309662337, 'gamma': 0.3876318011107287, 'min_child_weight': 2.103954513093046}
+xgb trial 6/12 val macro-F1=0.8437  fit=10s  {'n_estimators': 600, 'max_depth': 6, 'learning_rate': 0.042395619312190845, 'subsample': 0.9265352415276302, 'colsample_bytree': 0.6897230857751562, 'reg_lambda': 9.067671302293823, 'gamma': 0.5899916930106103, 'min_child_weight': 4.027692013313422}
+xgb trial 7/12 val macro-F1=0.8481  fit=4s  {'n_estimators': 600, 'max_depth': 6, 'learning_rate': 0.14242016957442377, 'subsample': 0.6603152076673474, 'colsample_bytree': 0.7201567335940937, 'reg_lambda': 0.3013893651229221, 'gamma': 0.40249829810398163, 'min_child_weight': 1.2494074577425842}
+xgb trial 8/12 val macro-F1=0.8386  fit=3s  {'n_estimators': 600, 'max_depth': 7, 'learning_rate': 0.2785795969866193, 'subsample': 0.686001614942352, 'colsample_bytree': 0.8358825813056425, 'reg_lambda': 0.39887807290064603, 'gamma': 0.8740770261495044, 'min_child_weight': 4.594251209508508}
+xgb trial 9/12 val macro-F1=0.8415  fit=3s  {'n_estimators': 600, 'max_depth': 6, 'learning_rate': 0.20998853109231683, 'subsample': 0.9779792684579918, 'colsample_bytree': 0.9519583940979635, 'reg_lambda': 1.378600068440082, 'gamma': 0.1454599537609269, 'min_child_weight': 1.5576271015159247}
+xgb trial 10/12 val macro-F1=0.8559  fit=2s  {'n_estimators': 600, 'max_depth': 3, 'learning_rate': 0.2541130328013241, 'subsample': 0.8209305950669055, 'colsample_bytree': 0.5902762492244558, 'reg_lambda': 5.862917572044992, 'gamma': 0.6415717052224807, 'min_child_weight': 3.7127377555137473}
+xgb trial 11/12 val macro-F1=0.8586  fit=6s  {'n_estimators': 600, 'max_depth': 3, 'learning_rate': 0.07728167686591252, 'subsample': 0.6957956850727379, 'colsample_bytree': 0.5190286433456195, 'reg_lambda': 5.65506519655814, 'gamma': 0.4677302168140961, 'min_child_weight': 3.528866258428701}
+xgb trial 12/12 val macro-F1=0.8557  fit=6s  {'n_estimators': 600, 'max_depth': 5, 'learning_rate': 0.0629918791858909, 'subsample': 0.9005299679419712, 'colsample_bytree': 0.5125984354008801, 'reg_lambda': 0.5550991280346753, 'gamma': 0.03035029438411163, 'min_child_weight': 1.327064715697355}
+lgbm trial 1/10 val macro-F1=0.8401  fit=6s  {'n_estimators': 600, 'num_leaves': 31, 'learning_rate': 0.13642123749587187, 'subsample': 0.7712880985557925, 'colsample_bytree': 0.7618700539552401, 'reg_lambda': 5.56696405479282, 'min_child_samples': 50}
+lgbm trial 2/10 val macro-F1=0.8465  fit=4s  {'n_estimators': 600, 'num_leaves': 63, 'learning_rate': 0.11679176911571008, 'subsample': 0.8734737493358175, 'colsample_bytree': 0.6777068885117561, 'reg_lambda': 1.0919354682952644, 'min_child_samples': 20}
+lgbm trial 3/10 val macro-F1=0.8373  fit=3s  {'n_estimators': 600, 'num_leaves': 63, 'learning_rate': 0.2433887883687182, 'subsample': 0.6604249112307262, 'colsample_bytree': 0.9667096961537143, 'reg_lambda': 0.10241362336586467, 'min_child_samples': 50}
+lgbm trial 4/10 val macro-F1=0.8507  fit=4s  {'n_estimators': 600, 'num_leaves': 63, 'learning_rate': 0.19393137873359853, 'subsample': 0.6547056206170326, 'colsample_bytree': 0.7094518254565926, 'reg_lambda': 4.270832667672081, 'min_child_samples': 50}
+lgbm trial 5/10 val macro-F1=0.8445  fit=5s  {'n_estimators': 600, 'num_leaves': 127, 'learning_rate': 0.12752143834332205, 'subsample': 0.9172094632392136, 'colsample_bytree': 0.7565017914111043, 'reg_lambda': 2.8294292646407944, 'min_child_samples': 10}
+lgbm trial 6/10 val macro-F1=0.8466  fit=5s  {'n_estimators': 600, 'num_leaves': 15, 'learning_rate': 0.047385165599112426, 'subsample': 0.7452507802201407, 'colsample_bytree': 0.5897030137835733, 'reg_lambda': 0.4921787718481905, 'min_child_samples': 10}
+lgbm trial 7/10 val macro-F1=0.8434  fit=7s  {'n_estimators': 600, 'num_leaves': 31, 'learning_rate': 0.11231919245375324, 'subsample': 0.7360272269683359, 'colsample_bytree': 0.6357623099043926, 'reg_lambda': 8.018238709637941, 'min_child_samples': 50}
+lgbm trial 8/10 val macro-F1=0.8335  fit=3s  {'n_estimators': 600, 'num_leaves': 15, 'learning_rate': 0.2867583056275531, 'subsample': 0.8062090676425084, 'colsample_bytree': 0.760583064513112, 'reg_lambda': 6.209849107574714, 'min_child_samples': 20}
+lgbm trial 9/10 val macro-F1=0.8384  fit=5s  {'n_estimators': 600, 'num_leaves': 127, 'learning_rate': 0.114228406551517, 'subsample': 0.7706598015345033, 'colsample_bytree': 0.9390939297091403, 'reg_lambda': 0.6657210658169443, 'min_child_samples': 50}
+lgbm trial 10/10 val macro-F1=0.8382  fit=12s  {'n_estimators': 600, 'num_leaves': 63, 'learning_rate': 0.035142819899908626, 'subsample': 0.7719987447604653, 'colsample_bytree': 0.7597574099389295, 'reg_lambda': 7.9776759444784835, 'min_child_samples': 50}
+mlp trial 1/8 val macro-F1=0.8314  fit=13s  {'hidden': 256, 'depth': 2, 'dropout': 0.3, 'lr': 0.003, 'wd': 0.001}
+mlp trial 2/8 val macro-F1=0.8234  fit=9s  {'hidden': 256, 'depth': 2, 'dropout': 0.3, 'lr': 0.001, 'wd': 0.0001}
+mlp trial 3/8 val macro-F1=0.8197  fit=14s  {'hidden': 256, 'depth': 3, 'dropout': 0.1, 'lr': 0.001, 'wd': 0.0001}
+mlp trial 4/8 val macro-F1=0.8220  fit=5s  {'hidden': 128, 'depth': 3, 'dropout': 0.1, 'lr': 0.001, 'wd': 1e-05}
+mlp trial 5/8 val macro-F1=0.8148  fit=4s  {'hidden': 128, 'depth': 2, 'dropout': 0.1, 'lr': 0.003, 'wd': 0.001}
+mlp trial 6/8 val macro-F1=0.8274  fit=13s  {'hidden': 256, 'depth': 3, 'dropout': 0.1, 'lr': 0.003, 'wd': 0.0001}
+mlp trial 7/8 val macro-F1=0.8223  fit=7s  {'hidden': 256, 'depth': 2, 'dropout': 0.1, 'lr': 0.003, 'wd': 0.0001}
+mlp trial 8/8 val macro-F1=0.8222  fit=6s  {'hidden': 128, 'depth': 2, 'dropout': 0.1, 'lr': 0.001, 'wd': 0.001}
+cnnlstm trial 1/6 val macro-F1=0.8378  fit=25s  {'conv': 64, 'lstm': 64, 'dropout': 0.2, 'lr': 0.002, 'wd': 1e-05, 'epochs': 30}
+cnnlstm trial 2/6 val macro-F1=0.8378  fit=26s  {'conv': 64, 'lstm': 64, 'dropout': 0.2, 'lr': 0.002, 'wd': 1e-05, 'epochs': 30}
+cnnlstm trial 3/6 val macro-F1=0.8366  fit=30s  {'conv': 64, 'lstm': 64, 'dropout': 0.2, 'lr': 0.002, 'wd': 0.0001, 'epochs': 30}
+cnnlstm trial 4/6 val macro-F1=0.8421  fit=44s  {'conv': 64, 'lstm': 100, 'dropout': 0.4, 'lr': 0.002, 'wd': 1e-05, 'epochs': 30}
+cnnlstm trial 5/6 val macro-F1=0.8460  fit=87s  {'conv': 64, 'lstm': 100, 'dropout': 0.4, 'lr': 0.002, 'wd': 0.0001, 'epochs': 30}
+cnnlstm trial 6/6 val macro-F1=0.8460  fit=89s  {'conv': 64, 'lstm': 100, 'dropout': 0.4, 'lr': 0.002, 'wd': 0.0001, 'epochs': 30}
+xgblag trial 1/6 val macro-F1=0.8603  fit=41s  {'n_estimators': 500, 'max_depth': 4, 'learning_rate': 0.042517192225732275, 'subsample': 0.6080862293424587, 'colsample_bytree': 0.4263843389762282, 'reg_lambda': 0.31415179564222573, 'gamma': 0.18750333435596656, 'min_child_weight': 3.6902502504749224}
+xgblag trial 2/6 val macro-F1=0.8637  fit=41s  {'n_estimators': 500, 'max_depth': 3, 'learning_rate': 0.043268813930733105, 'subsample': 0.8361551471339407, 'colsample_bytree': 0.3830055765236085, 'reg_lambda': 2.268545096965664, 'gamma': 0.02107535444389108, 'min_child_weight': 2.0444203585451124}
+xgblag trial 3/6 val macro-F1=0.8455  fit=18s  {'n_estimators': 500, 'max_depth': 6, 'learning_rate': 0.11835587151489817, 'subsample': 0.9246349610987004, 'colsample_bytree': 0.629013040805863, 'reg_lambda': 1.665334852762425, 'gamma': 0.19125268008489738, 'min_child_weight': 3.7531398569484153}
+xgblag trial 4/6 val macro-F1=0.8394  fit=45s  {'n_estimators': 500, 'max_depth': 8, 'learning_rate': 0.043329935125924604, 'subsample': 0.9206657620367493, 'colsample_bytree': 0.780035458513088, 'reg_lambda': 5.105263268045156, 'gamma': 0.0507096459660612, 'min_child_weight': 2.181022186038551}
+xgblag trial 5/6 val macro-F1=0.8441  fit=34s  {'n_estimators': 500, 'max_depth': 8, 'learning_rate': 0.05019890738404677, 'subsample': 0.8506447277312483, 'colsample_bytree': 0.6987290876831667, 'reg_lambda': 0.4240752668176147, 'gamma': 0.8628092349187347, 'min_child_weight': 6.26797005313509}
+xgblag trial 6/6 val macro-F1=0.8576  fit=33s  {'n_estimators': 500, 'max_depth': 4, 'learning_rate': 0.05188760217063566, 'subsample': 0.9067436626952621, 'colsample_bytree': 0.7413103599509592, 'reg_lambda': 0.24806479812343268, 'gamma': 0.5736411794985231, 'min_child_weight': 4.352612109886368}
+TUNING DONE

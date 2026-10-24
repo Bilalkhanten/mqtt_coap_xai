@@ -1,0 +1,18 @@
+full 0.9066044395004358
+Traffic volume: drop 0.9053  only 0.6573
+Source dynamics: drop 0.9062  only 0.6594
+Temporal integrity: drop 0.8508  only 0.4777
+MQTT semantics: drop 0.9054  only 0.3842
+CoAP semantics: drop 0.9063  only 0.5186
+Energy residuals: drop 0.8995  only 0.3101
+Energy bias (multi-scale): drop 0.8974  only 0.2607
+Context: drop 0.9086  only 0.1329
+xgb none 0.8971814778772691
+xgb class-weight 0.908029828711889
+xgb SMOTE 0.911499375777058
+xgb undersample 0.8297599428949836
+xgb SMOTE+class-weight 0.911499375777058
+rf none 0.8997553450034249
+rf class-weight 0.8960143633489652
+rf SMOTE 0.8965693982309192
+rf undersample 0.8484746230911319
