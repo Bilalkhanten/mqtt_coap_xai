@@ -1,0 +1,139 @@
+name: CI
+
+# Pipeline graph (arrows are `needs:`; siteA.pkl travels between jobs as an artifact):
+#
+#   lint ──┬──▶ check-artifacts
+#          │
+#          └──▶ generate-data ──┬──▶ reproduce-stats
+#                               └──▶ figures
+#
+# lint              ruff, errors only (syntax errors, undefined names); the code is not reformatted
+# check-artifacts   required files exist; probabilities / test indices are consistent; README headline numbers == results/*.json
+# generate-data     src/generate_data.py regenerates both simulated sites (~40 s); burst schedules == shipped data/bursts.pkl
+# reproduce-stats   src/exp_stats.py on the regenerated data reproduces the shipped results/stats.json
+# figures           src/figures_a..d.py redraw all figures from the shipped results (uploaded as an artifact)
+#
+# The long steps (tuning, model training, explainers, latency) are not part of CI; run them with `bash src/run_all.sh`.
+# "Run workflow" on the Actions tab starts the pipeline by hand (workflow_dispatch).
+
+on:
+  push:
+    branches: [main, "ci/**"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PYTHON_VERSION: "3.13"
+  # README: "Tested with Python 3.13 (NumPy 2.5, SciPy 1.18, pandas 3.0, scikit-learn 1.9, ... matplotlib 3.11)"
+  DEPS: "numpy~=2.5.0 scipy~=1.18.0 pandas~=3.0.0 scikit-learn~=1.9.0 matplotlib~=3.11.0"
+
+jobs:
+  lint:
+    name: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - name: Ruff (errors only)
+        run: |
+          python -m pip install --upgrade pip ruff
+          ruff check --isolated --select E9,F63,F7,F82 .
+
+  check-artifacts:
+    name: check-artifacts
+    needs: [lint]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - name: Install
+        run: python -m pip install numpy~=2.5.0 pandas~=3.0.0
+      - name: Result files and README headline numbers agree
+        run: python tools/check_repro.py artifacts
+
+  generate-data:
+    name: generate-data
+    needs: [lint]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - name: Install
+        run: python -m pip install ${{ env.DEPS }}
+      - name: Keep a copy of the shipped burst schedules
+        run: mkdir -p "$RUNNER_TEMP/shipped" && cp data/bursts.pkl "$RUNNER_TEMP/shipped/"
+      - name: Generate both sites
+        run: python src/generate_data.py
+      - name: Burst schedules match the shipped file
+        run: python tools/check_repro.py data --shipped "$RUNNER_TEMP/shipped"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: siteA-data
+          path: data/siteA.pkl
+          retention-days: 1
+
+  reproduce-stats:
+    name: reproduce-stats
+    needs: [generate-data]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - name: Install
+        run: python -m pip install ${{ env.DEPS }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: siteA-data
+          path: data
+      - name: Keep a copy of the shipped stats.json
+        run: mkdir -p "$RUNNER_TEMP/shipped" && cp results/stats.json "$RUNNER_TEMP/shipped/"
+      - name: Re-run the statistics
+        run: python src/exp_stats.py
+      - name: Result equals the shipped stats.json
+        run: python tools/check_repro.py stats --shipped "$RUNNER_TEMP/shipped"
+
+  figures:
+    name: figures
+    needs: [generate-data]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - name: Install
+        run: python -m pip install ${{ env.DEPS }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: siteA-data
+          path: data
+      - name: Redraw every figure (src/make_figures.sh, starting from an empty figs/)
+        env:
+          MPLBACKEND: Agg
+        run: |
+          expected=$(ls figs/*.png | wc -l)
+          rm figs/*.png
+          bash src/make_figures.sh
+          actual=$(ls figs/*.png | wc -l)
+          echo "figures: $actual regenerated, $expected shipped"
+          test "$actual" -eq "$expected"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: figures
+          path: figs/
+          retention-days: 14
