@@ -2,6 +2,7 @@ numpy>=2.0
 scipy>=1.13
 pandas>=2.2
 scikit-learn>=1.5
+imbalanced-learn>=0.12
 xgboost>=3.0
 lightgbm>=4.5
 torch>=2.4
